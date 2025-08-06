@@ -27,7 +27,23 @@
 
 **Node container image** - это реализация легковесной сборки ЯП Node.js на базе Astra Linux
 
-::include{file=docs/integration.md}
+Присоединяйтесь к нашим социальным сетям:
+
+<!-- markdownlint-disable MD033 -->
+
+<div class="badges-row-public">
+  <h4 align="center">
+    <a href="https://t.me/NGR_Softlab">
+      <img src="https://shields.io/badge/ngr-telegram-blue?logo=telegram&style=for-the-badge" alt="NGR Social Telegram" height="40" />
+    </a>
+    &emsp; &emsp; &emsp;
+    <a href="https://www.ngrsoftlab.ru/?utm_source=tg&utm_medium=start" >
+      <img src="https://shields.io/badge/ngr-web--page-yellow?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjIyLjcgMCA1MS45IDUxLjciPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNzQuNSAwSDYzLjhsMy42IDMuNWMuNy43LjcgMS45IDAgMi43LS43LjctMS45LjctMi42IDBMNTguOSAwSDUzbDE0LjUgMTMuOWMuNy43LjcgMS45IDAgMi43LS43LjctMS45LjctMi42IDBMNDkgMGgtNi44bDI1LjMgMjQuM2MuNy43LjcgMS45IDAgMi43LS43LjctMS45LjctMi42IDBMMzkgMGgtNy43bDM2LjEgMzQuN2MuNy43LjcgMS45IDAgMi42cy0xLjkuNy0yLjYgMEwyOSAwYy0zLjUuNC02LjMgMy40LTYuMyA3djQ0LjdoMTAuNmwtMy42LTMuNGMtLjctLjctLjctMS45IDAtMi42czEuOS0uNyAyLjcgMGw1LjggNmg1LjlMMjkuNyAzNy45Yy0uNy0uNy0uNy0xLjkgMC0yLjcuNy0uNyAxLjktLjcgMi43IDBsMTUuOCAxNi40SDU1TDI5LjggMjcuNGMtLjctLjctLjctMS45IDAtMi43LjctLjcgMS45LS43IDIuNyAwbDI1LjggMjYuOEg2NkwyOS45IDE2LjljLS43LS43LS43LTEuOSAwLTIuNnMxLjktLjcgMi43IDBsMzUuNyAzNy4yYzMuNS0uMyA2LjMtMy4zIDYuMy03VjB6IiBmaWxsPSIjRjhBRDAwIi8+PC9zdmc+" alt="NGR Social Media" height="40" />
+    </a>
+  </h4>
+</div>
+
+<!-- markdownlint-enable MD033 -->
 
 ## Contents
 
@@ -44,6 +60,7 @@
   - [How to test local](#how-to-test-local)
   - [Scratch](#scratch)
   - [Miscellaneous](#miscellaneous)
+    - [Cya!](#cya)
 
 ## [Requirements](#contents)
 
@@ -57,6 +74,8 @@
 | ![Astra 1.7](https://img.shields.io/badge/Astra-1.7.x-00ADD8?style=flat&logo=astra&logoColor=white) |                                                        ![Node.js 10](https://img.shields.io/badge/node.js-10.24-6DA55F?style=flat&logo=node.js&logoColor=white)                                                        | ✅ Fully supported |
 | ![Astra 1.8](https://img.shields.io/badge/Astra-1.8.x-00ADD8?style=flat&logo=astra&logoColor=white) | ![Node.js 18](https://img.shields.io/badge/node.js-18.19-6DA55F?style=flat&logo=node.js&logoColor=white) <br> ![Node.js 20](https://img.shields.io/badge/node.js-20.18-6DA55F?style=flat&logo=node.js&logoColor=white) | ✅ Fully supported |
 
+<div align="center"> <sub> Таблица 1. Поддерживаемые ОС-ы. </sub> </div>
+<p>&nbsp;</p>
 <!-- markdownlint-enable MD033 -->
 
 ## [What it is](#contents)
@@ -82,12 +101,10 @@ pre-commit installed at .git/hooks/commit-msg
 pre-commit installed at .git/hooks/pre-push
 ```
 
->>> [!warning] Предупреждение
-
-- Чтобы проверить свои изменения, воспользуйтесь командой `pre-commit run --all-files`
-- Чтобы проверить конкретную задачу, воспользуетесь командой `pre-commit run <target> --all-files`
-- Если Вы понимаете что творите и хотите пропустить проверку `pre-commit`-ом воспользуйтесь `--no-verify`, пример `git commit -m "Добавил изменения и не хочу проверки" --no-verify`
->>>
+> [!warning]
+> Чтобы проверить свои изменения, воспользуйтесь командой `pre-commit run --all-files`.
+> Чтобы проверить конкретную задачу, воспользуетесь командой `pre-commit run <target> --all-files`.
+> Если Вы понимаете что творите и хотите пропустить проверку `pre-commit`-ом воспользуйтесь `--no-verify`, пример `git commit -m "Добавил изменения и не хочу проверки" --no-verify`
 
 Существует несколько способов как можно взаимодействовать со сборкой образа. Благодаря скрипту[^2] может существовать 3 способа передачи аргумента в `Dockerfile`:
 
@@ -125,13 +142,6 @@ pre-commit installed at .git/hooks/pre-push
     .. build ...
     ```
 
-    >>> [!tip] Проверка доступных версий приложения
-
-    - `apt show nodejs`
-    - `apt-cache policy nodejs`
-    - `apt-cache show nodejs`
-    >>>
-
 3. Передача ссылки, на заранее собранный из исходников Node.js
 
     ```console
@@ -148,6 +158,12 @@ pre-commit installed at .git/hooks/pre-push
 
     .. build ...
     ```
+
+> [!tip]
+> Проверка доступных версий приложения -
+> `apt show nodejs`,
+> `apt-cache policy nodejs`,
+> `apt-cache show nodejs`
 
 Работа с прокси репозиториями. Логика работы тоже является 'плавающей'[^3] т.е. позволяет передавать разный набор параметров для Вашего удобства:
 
@@ -197,6 +213,11 @@ pre-commit installed at .git/hooks/pre-push
 | `npm_registry_proxy` |          ''           | string | Переменная, для установки своего проксирующего репозитория. |
 | `node_identity`      |        18.19.0        | string |                               Ожидаемая версия Node.js[^2]. |
 | `yarn_version`       |        1.22.22        | string |                               Ожидаемая версия Yarn v1[^4]. |
+
+<!-- markdownlint-disable MD033 -->
+<div align="center"> <sub> Таблица 2. Переопределяемые аргументы для сборки образа. </sub> </div>
+<p>&nbsp;</p>
+<!-- markdownlint-enable MD033 -->
 
 ### [Advanced environment](#contents)
 
@@ -475,7 +496,16 @@ $ figlet -f doom 'NodeJs'
 $ aasvg --source --embed < ./docs/ascii.txt > docs/images/logo.svg
 ```
 
-::include{file=docs/cya.md}
+<!-- markdownlint-disable MD033 MD041 MD051 -->
+<table align="center"><tr><td align="center" width="9999">
+<img src="docs/images/cya.png" align="center" alt="Rocket turtle">
+
+<div align="center"> <sub> Rocket Turtle под авторством <a href="https://chat.qwen.ai/">qwen.ai</a>. </sub> </div>
+
+### [Cya!](#contents)
+
+</td></tr></table>
+<!-- markdownlint-enable MD033 MD041 MD051 -->
 
 ---
 
