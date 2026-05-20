@@ -17,6 +17,7 @@ SHELL [ "/bin/bash", "-exo", "pipefail", "-c" ]
 ARG node_identity='18.19.0'
 ARG npm_registry_proxy
 ARG yarn_version='1.22.22'
+ARG certified
 
 ## Copy issue
 COPY docs/issue /etc/issue
@@ -29,22 +30,16 @@ RUN \
 ## Install LP
 RUN \
     --mount=type=bind,source=./scripts,target=/usr/local/sbin,readonly \
-    apt-install.sh \
-## Small init process
-        dumb-init \
-    && node-install-approximately.sh "${node_identity}" \
+    node-install-approximately.sh "${node_identity}" \
 ## Set corporative proxy
     && node-set-proxy.sh 'npm' \
 ## Mock test
     && node --version \
-    && npm --version \
 ## Install yarn
     && node-install-yarn.sh "${yarn_version}" \
 ## Set corporative proxy
     && node-set-proxy.sh 'yarn' \
 ## Remove unneeded component and cache
-    && npm cache clean --force \
-    && npm config --global set script-shell bash \
     && node-rm-unneeded.sh \
     && find "/usr/" -iname '*.exe' -ls -delete \
 ## Create link
@@ -94,5 +89,5 @@ ENV \
 ## Set work directory
 WORKDIR /
 
-ENTRYPOINT [ "dumb-init", "docker-entrypoint.sh" ]
+ENTRYPOINT [ "docker-entrypoint.sh" ]
 CMD [ "" ]

@@ -2,7 +2,13 @@
 
 set -e
 
+# shellcheck disable=SC1091
 source /etc/environment
+
+if [[ -z ${certified} ]]; then
+  npm cache clean --force
+  npm config --global set script-shell bash
+fi
 
 if [[ ${NODE_REVISION,,} == 'installed-from-url' ]]; then
   ## Commented because switch to absolute optimization

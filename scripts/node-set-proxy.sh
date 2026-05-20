@@ -2,6 +2,9 @@
 
 set -e
 
+## If certified - exit
+[ -z "${certified}" ] || exit 0
+
 ## Check first arg on exist
 : "${1:?Define node package manager such as 'yarn', 'npm' or 'pnpm' and etc}"
 

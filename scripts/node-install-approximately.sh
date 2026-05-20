@@ -118,9 +118,10 @@ install_nodejs() {
 
     ## Install nodejs with deps
     apt-install.sh \
-      "nodejs=${full_version}" \
-      npm
-
+      "nodejs=${full_version}"
+    if [[ -z ${certified} ]]; then
+      apt-install.sh npm
+    fi
     ## Define variables for /etc/environment
     node_revision="${full_version}"
   fi
