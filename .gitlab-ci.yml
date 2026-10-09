@@ -3,7 +3,7 @@ include:
     ref: master
     file: .gitlab-ci-container-workflow.yml
   - project: borrowed-components/automation/gitlab-ci
-    ref: feature/release-template
+    ref: master
     file: templates/.gitlab-ci-release.yml
 
 stages:
@@ -26,7 +26,6 @@ variables:
     {version}-astra1.8.x-certified {series}-astra1.8.x-certified ::: --build-arg node_identity={artifact} --build-arg image_version=1.8.x-certified --build-arg certified=true
   RELEASE_IMAGE_VARIABLES: CONTAINER_MANIFEST_PATH=Dockerfile
   RELEASE_VERIFY_COMMAND: node --version | grep -Fx "v{version}"
-  RELEASE_TEMPLATES_REF: feature/release-template
 
 release-plan:
   extends: .release-tpl-plan
