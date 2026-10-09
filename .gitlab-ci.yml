@@ -1,0 +1,37 @@
+include:
+  - project: borrowed-components/automation/gitlab-ci
+    ref: master
+    file: .gitlab-ci-container-workflow.yml
+  - project: borrowed-components/automation/gitlab-ci
+    ref: feature/release-template
+    file: templates/.gitlab-ci-release.yml
+
+stages:
+  - sync
+  - analyze
+  - assembly
+  - release
+
+variables:
+  RELEASE_SOURCE_PROJECT: borrowed-components/interpreters/nodejs/node
+  RELEASE_TAG_REGEX: '^v([0-9]+\.[0-9]+\.[0-9]+)$'
+  RELEASE_SERIES_FIELDS: "1"
+  RELEASE_SERIES_MIN: "20"
+  RELEASE_SERIES_FILTER: '^[0-9]*[02468]$'
+  RELEASE_ARTIFACT_URL: https://pr.ngrsoftlab.ru/repository/assembled-interpreter/node/node-v{version}-linux-amd64.tar.gz
+  RELEASE_ARTIFACT_REF: v{version}
+  RELEASE_IMAGE_NAME: node
+  RELEASE_IMAGE_VARIANTS: |
+    {version}-astra1.8.x-slim {series}-astra1.8.x-slim ::: --build-arg node_identity={artifact} --build-arg image_version=1.8.x-slim
+    {version}-astra1.8.x-certified {series}-astra1.8.x-certified ::: --build-arg node_identity={artifact} --build-arg image_version=1.8.x-certified --build-arg certified=true
+  RELEASE_IMAGE_VARIABLES: CONTAINER_MANIFEST_PATH=Dockerfile
+  RELEASE_VERIFY_COMMAND: node --version | grep -Fx "v{version}"
+  RELEASE_TEMPLATES_REF: feature/release-template
+
+release-plan:
+  extends: .release-tpl-plan
+  stage: release
+
+release-run:
+  extends: .release-tpl-run
+  stage: release
